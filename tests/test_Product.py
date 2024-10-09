@@ -2,6 +2,7 @@ import pytest
 
 from src.Product import Product
 
+
 @pytest.fixture
 def some_product():
     return Product("болт", "болт М24 170", 2.50, 1200)
