@@ -1,4 +1,7 @@
 import json
+import os
+
+from data.path_to_directory import PATH_TO_DATA_DIRECTORY
 
 
 class Category:
@@ -18,5 +21,11 @@ class Category:
         Category.count_products += len(products)
 
 
-def read_json_file(filename:str) -> list:
-    pass
+def read_json_file(filename: str) -> list:
+    """Функция для чтения данных из json файла"""
+
+    path_to_file = os.path.join(PATH_TO_DATA_DIRECTORY, filename)
+    with open(path_to_file, "r", encoding="utf-8") as file:
+        result = json.load(file)
+
+        return result
