@@ -5,13 +5,13 @@ from src.Product import Product
 
 @pytest.fixture
 def some_product():
-    return Product("болт", "болт М24 170", 2.50, 1200)
+    return Product("Болт М24 170", "Болт М24 170 ГОСТ 6552714", 2.50, 1200)
 
 
 def test_Product(some_product):
     x = some_product
-    assert x.name == "болт"
-    assert x.description == "болт М24 170"
+    assert x.name == "Болт М24 170"
+    assert x.description == "Болт М24 170 ГОСТ 6552714"
     assert x.price == 2.50
     assert x.quantity == 1200
 
@@ -23,6 +23,21 @@ def test_new_product():
     assert product.description == "description"
     assert product.price == 1
     assert product.quantity == 2
+
+
+def test_dubl_product(some_product):
+
+    params = {"name": "Болт М24 170", "description": "Болт М24 170 ГОСТ 6552714", "price": 3.50, "quantity": 200}
+    assert some_product.name == "Болт М24 170"
+    assert some_product.description == "Болт М24 170 ГОСТ 6552714"
+    assert some_product.price == 2.50
+    assert some_product.quantity == 1200
+    new_product = Product.new_product(params, [some_product])
+    assert some_product.name == "Болт М24 170"
+    assert some_product.description == "Болт М24 170 ГОСТ 6552714"
+    assert some_product.price == 3.50
+    assert some_product.quantity == 1400
+
 
 
 def test_new_price(some_product):
