@@ -2,6 +2,7 @@ import json
 import os
 
 from data.path_to_directory import PATH_TO_DATA_DIRECTORY
+from src.Product import Product
 
 
 class Category:
@@ -9,23 +10,32 @@ class Category:
 
     name: str
     description: str
-    products: list
+    __products: list
     count_categories = 0
     count_products = 0
 
     def __init__(self, name, description, products):
         self.name = name
         self.description = description
-        self.products = products
+        self.__products = products
         Category.count_categories += 1
         Category.count_products += len(products)
 
 
-def read_json_file(filename: str) -> list:
-    """Функция для чтения данных из json файла"""
+    def add_product(self, name, description, price, quantity):
+        """Добавляет продукт в список продуктов"""
 
-    path_to_file = os.path.join(PATH_TO_DATA_DIRECTORY, filename)
-    with open(path_to_file, "r", encoding="utf-8") as file:
-        result = json.load(file)
+        self.__products.append(Product(name, description, price, quantity))
 
-        return result
+
+    @property
+    def products(self):
+        """Возвращает информацию о продуктах в виде строки"""
+        product_list = []
+        for product in self.__products:
+            product_list.append(f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n")
+
+        product_str = "".join(product_list)
+        return product_str
+
+
