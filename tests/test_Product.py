@@ -1,6 +1,9 @@
 import pytest
 
+from unittest.mock import patch
+
 from src.Product import Product
+
 
 
 @pytest.fixture
@@ -41,6 +44,14 @@ def test_dubl_product(some_product):
 
 
 def test_new_price(some_product):
+    assert some_product.price == 2.5
+    some_product.price = 3
+    assert some_product.price == 3
+
+
+@patch("src.Product.input")
+def test_new_low_price(mock_input, some_product):
+    mock_input.return_value = "y"
     assert some_product.price == 2.5
     some_product.price = 2
     assert some_product.price == 2

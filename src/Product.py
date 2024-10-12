@@ -23,7 +23,14 @@ class Product:
     def price(self, new_price):
         """сеттер для цены"""
         if new_price > 0:
-            self.__price = new_price
+            if new_price < self.__price:
+                var = input("Вы действительно хотите понизить цену?: ")
+                if var == "y":
+                    self.__price = new_price
+                else:
+                    print("Отмена операции")
+            else:
+                self.__price = new_price
         else:
             print("“Цена не должна быть нулевая или отрицательная”")
 
