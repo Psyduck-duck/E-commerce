@@ -14,3 +14,12 @@ def test_Product(some_product):
     assert x.description == "болт М24 170"
     assert x.price == 2.50
     assert x.quantity == 1200
+
+
+def test_new_product():
+    params_dict = {"name": "name", "description": "description", "price": 1, "quantity": 2}
+    product = Product.new_product(params_dict)
+    assert product.name == "name"
+    assert product.description == "description"
+    assert product.price == 1
+    assert product.quantity == 2
