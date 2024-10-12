@@ -23,3 +23,9 @@ def test_new_product():
     assert product.description == "description"
     assert product.price == 1
     assert product.quantity == 2
+
+
+def test_new_price(some_product):
+    assert some_product.price == 2.5
+    some_product.price = 2
+    assert some_product.price == 2
