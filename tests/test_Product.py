@@ -28,7 +28,7 @@ def test_new_product():
     assert product.quantity == 2
 
 
-def test_dubl_product(some_product):
+def test_dubl_product(some_product, capsys):
 
     params = {"name": "Болт М24 170", "description": "Болт М24 170 ГОСТ 6552714", "price": 3.50, "quantity": 200}
     assert some_product.name == "Болт М24 170"
@@ -40,6 +40,9 @@ def test_dubl_product(some_product):
     assert some_product.description == "Болт М24 170 ГОСТ 6552714"
     assert some_product.price == 3.50
     assert some_product.quantity == 1400
+    message = capsys.readouterr()
+    assert message.out.strip() == "Продукт успешо добавлен к существующему."
+
 
 
 
@@ -49,9 +52,25 @@ def test_new_price(some_product):
     assert some_product.price == 3
 
 
+def test_new_low_price(capsys, some_product):
+    assert some_product.price == 2.5
+    some_product.price = -1
+    message = capsys.readouterr()
+    assert message.out.strip() == "Цена не должна быть нулевая или отрицательная"
+
+
 @patch("src.Product.input")
 def test_new_low_price(mock_input, some_product):
     mock_input.return_value = "y"
     assert some_product.price == 2.5
     some_product.price = 2
     assert some_product.price == 2
+
+
+@patch("src.Product.input")
+def test_new_low_price_no_verification(mock_input, capsys, some_product):
+    mock_input.return_value = "n"
+    assert some_product.price == 2.5
+    some_product.price = 2
+    message = capsys.readouterr()
+    assert message.out.strip() == "Отмена операции"

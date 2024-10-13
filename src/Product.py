@@ -24,15 +24,15 @@ class Product:
         """сеттер для цены"""
         if new_price > 0:
             if new_price < self.__price:
-                var = input("Вы действительно хотите понизить цену?: ")
-                if var == "y":
+                verification = input("Вы действительно хотите понизить цену?: ")
+                if verification == "y":
                     self.__price = new_price
                 else:
                     print("Отмена операции")
             else:
                 self.__price = new_price
         else:
-            print("“Цена не должна быть нулевая или отрицательная”")
+            print("Цена не должна быть нулевая или отрицательная")
 
 
     @classmethod
