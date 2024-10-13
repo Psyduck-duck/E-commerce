@@ -25,6 +25,8 @@ class Category:
         """Добавляет продукт в список продуктов"""
 
         self.__products.append(Product(name, description, price, quantity))
+        Category.count_products += 1
+
 
     @property
     def products(self):
