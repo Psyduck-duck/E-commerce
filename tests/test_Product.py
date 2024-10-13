@@ -1,9 +1,8 @@
-import pytest
-
 from unittest.mock import patch
 
-from src.Product import Product
+import pytest
 
+from src.Product import Product
 
 
 @pytest.fixture
@@ -42,8 +41,6 @@ def test_dubl_product(some_product, capsys):
     assert some_product.quantity == 1400
     message = capsys.readouterr()
     assert message.out.strip() == "Продукт успешо добавлен к существующему."
-
-
 
 
 def test_new_price(some_product):

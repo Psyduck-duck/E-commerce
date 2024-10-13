@@ -6,7 +6,7 @@ from src.Product import Product
 
 
 class Category:
-    """ Класс для обозначения группы продуктов"""
+    """Класс для обозначения группы продуктов"""
 
     name: str
     description: str
@@ -21,12 +21,10 @@ class Category:
         Category.count_categories += 1
         Category.count_products += len(products)
 
-
     def add_product(self, name, description, price, quantity):
         """Добавляет продукт в список продуктов"""
 
         self.__products.append(Product(name, description, price, quantity))
-
 
     @property
     def products(self):
@@ -37,5 +35,3 @@ class Category:
 
         product_str = "".join(product_list)
         return product_str
-
-

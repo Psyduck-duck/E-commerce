@@ -1,5 +1,6 @@
 class Product:
-    """ Класс для определения продукта"""
+    """Класс для определения продукта"""
+
     name: str
     description: str
     __price: float
@@ -11,13 +12,11 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
-
     @property
     def price(self):
         """геттер для цены"""
 
         return self.__price
-
 
     @price.setter
     def price(self, new_price):
@@ -33,7 +32,6 @@ class Product:
                 self.__price = new_price
         else:
             print("Цена не должна быть нулевая или отрицательная")
-
 
     @classmethod
     def new_product(cls, params_dict, check_list=None):
