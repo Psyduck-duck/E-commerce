@@ -71,3 +71,7 @@ def test_new_low_price_no_verification(mock_input, capsys, some_product):
     some_product.price = 2
     message = capsys.readouterr()
     assert message.out.strip() == "Отмена операции"
+
+
+def test_str_product(some_product):
+    assert str(some_product) == "Болт М24 170, 2.5 руб. Остаток: 1200 шт."

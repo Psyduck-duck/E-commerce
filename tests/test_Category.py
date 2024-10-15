@@ -29,3 +29,7 @@ def test_add_product(some_category):
     assert len((some_category.products.rstrip()).split("\n")) == 3
     some_category.add_product("name", "description", 1, 1)
     assert len((some_category.products.rstrip()).split("\n")) == 4
+
+
+def test_str_category(some_category):
+    assert str(some_category) == "Болты, количество продуктов: 300"
