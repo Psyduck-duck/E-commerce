@@ -2,6 +2,7 @@ import pytest
 
 from src.Category import Category
 from src.Product import Product
+from src.iteration_category import CategoryIterator
 
 
 @pytest.fixture
@@ -33,3 +34,14 @@ def test_add_product(some_category):
 
 def test_str_category(some_category):
     assert str(some_category) == "Болты, количество продуктов: 300"
+
+
+def test_category_iteration(some_category):
+    iterator = CategoryIterator(some_category)
+    assert iterator.index == 0
+    assert next(iterator) == "Болт М8 60, 2.5 руб. Остаток: 150 шт."
+    assert next(iterator) == "Болт М10 100, 4.5 руб. Остаток: 100 шт."
+    assert next(iterator) == "Болт М12 40, 3 руб. Остаток: 50 шт."
+
+    with pytest.raises(StopIteration):
+        next(iterator)
