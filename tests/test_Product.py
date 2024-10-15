@@ -9,6 +9,7 @@ from src.Product import Product
 def some_product():
     return Product("Болт М24 170", "Болт М24 170 ГОСТ 6552714", 2.50, 1200)
 
+
 @pytest.fixture
 def some_product_2():
     return Product("Болт М10 100", "Болт М10 100 ГОСТ 20236511", 4.5, 1000)

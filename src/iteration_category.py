@@ -9,11 +9,9 @@ class CategoryIterator:
         self.category = category_obj
         self.index = 0
 
-
     def __iter__(self):
         self.index = 0
         return self
-
 
     def __next__(self):
         self.products_list = self.category.products.rstrip().split("\n")
