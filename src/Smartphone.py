@@ -2,7 +2,7 @@ from src.Product import Product
 
 
 class Smartphone(Product):
-    """ Класс для определения продукта типа смартфон"""
+    """Класс для определения продукта типа смартфон"""
 
     def __init__(self, name, description, price, quantity, efficiency, model, memory, color):
         """Конструктор для определения смартфона"""
@@ -11,7 +11,6 @@ class Smartphone(Product):
         self.model = model
         self.memory = memory
         self.color = color
-
 
     def __add__(self, other):
         """Метод для сложения стоимости товаров вида смартфон"""

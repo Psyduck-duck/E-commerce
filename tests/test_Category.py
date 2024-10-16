@@ -1,8 +1,8 @@
 import pytest
 
 from src.Category import Category
-from src.LawnGrass import LawnGrass
 from src.iteration_category import CategoryIterator
+from src.LawnGrass import LawnGrass
 from src.Product import Product
 
 

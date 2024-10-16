@@ -12,7 +12,6 @@ class LawnGrass(Product):
         self.germination_period = germination_period
         self.color = color
 
-
     def __add__(self, other):
         """Метод для сложения стоимости товаров вида трава газонная"""
 
