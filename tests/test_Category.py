@@ -2,6 +2,7 @@ import pytest
 
 from src.Category import Category
 from src.iteration_category import CategoryIterator
+from src.LawnGrass import LawnGrass
 from src.Product import Product
 
 
@@ -11,6 +12,16 @@ def some_category():
     product_2 = Product("Болт М10 100", "Болт М10 100 ГОСТ 20236511", 4.5, 100)
     product_3 = Product("Болт М12 40", "Болт М12 40 ГОСТ 20236511", 3, 50)
     return Category("Болты", "Нестандартка", [product_1, product_2, product_3])
+
+
+@pytest.fixture
+def some_product():
+    return Product("Болт М24 170", "Болт М24 170 ГОСТ 6552714", 2.50, 1200)
+
+
+@pytest.fixture
+def some_lawn_grass():
+    return LawnGrass("Grass", "Nice Grass", 2, 150, "Russia", "2 months", "Red")
 
 
 def test_Category(some_category):
@@ -26,10 +37,18 @@ def test_Category(some_category):
     assert Category.count_categories == 2
 
 
-def test_add_product(some_category):
+class LeftClass:
+    pass
+
+
+def test_add_product(some_category, some_product, some_lawn_grass):
     assert len((some_category.products.rstrip()).split("\n")) == 3
-    some_category.add_product("name", "description", 1, 1)
+    some_category.add_product(some_product)
     assert len((some_category.products.rstrip()).split("\n")) == 4
+    some_category.add_product(some_lawn_grass)
+    assert len((some_category.products.rstrip()).split("\n")) == 5
+    with pytest.raises(TypeError):
+        some_category.add_product(LeftClass())
 
 
 def test_str_category(some_category):
