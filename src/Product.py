@@ -5,17 +5,32 @@ class BaseProduct(ABC):
     """Абстрактный класс для определения базовых методов для класс Product и дочерних"""
 
     @abstractmethod
-    def __init__(self, name, description):
+    def __init__(self, name, description, price, quantity):
         """Конструктор с базовыми свойствами товара"""
         self.name = name
         self.description = description
+        self.__price = price
+        self.quantity = quantity
+        super().__init__()
 
     @abstractmethod
     def __add__(self, other):
         pass
 
+    @property
+    def get(self):
+        return self.__price
 
-class Product(BaseProduct):
+
+class MixinPrintInfo:
+    """Класс-миксин для вывода в консоль информации о создании продукта"""
+
+    def __init__(self):
+        """Код выполняется при инициализации продукта"""
+        print(f"{self.__class__.__name__} ('{self.name}', '{self.description}', {self.price}, {self.quantity})")
+
+
+class Product(BaseProduct, MixinPrintInfo):
     """Класс для определения продукта"""
 
     name: str
@@ -24,9 +39,8 @@ class Product(BaseProduct):
     quantity: int
 
     def __init__(self, name, description, price, quantity):
-        super().__init__(name, description)
         self.__price = price
-        self.quantity = quantity
+        super().__init__(name, description, price, quantity)
 
     def __str__(self):
         return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
@@ -78,3 +92,6 @@ class Product(BaseProduct):
                     return product
 
         return cls(name, description, price, quantity)
+
+
+product = Product("name", "dis", 1, 100)
