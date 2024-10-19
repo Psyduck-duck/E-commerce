@@ -4,7 +4,6 @@ from abc import ABC, abstractmethod
 class BaseProduct(ABC):
     """Абстрактный класс для определения базовых методов для класс Product и дочерних"""
 
-    @abstractmethod
     def __init__(self, name, description, price, quantity):
         """Конструктор с базовыми свойствами товара"""
         self.name = name
