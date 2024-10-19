@@ -1,4 +1,21 @@
-class Product:
+from abc import ABC, abstractmethod
+
+
+class BaseProduct(ABC):
+    """Абстрактный класс для определения базовых методов для класс Product и дочерних"""
+
+    @abstractmethod
+    def __init__(self, name, description):
+        """Конструктор с базовыми свойствами товара"""
+        self.name = name
+        self.description = description
+
+    @abstractmethod
+    def __add__(self, other):
+        pass
+
+
+class Product(BaseProduct):
     """Класс для определения продукта"""
 
     name: str
@@ -7,8 +24,7 @@ class Product:
     quantity: int
 
     def __init__(self, name, description, price, quantity):
-        self.name = name
-        self.description = description
+        super().__init__(name, description)
         self.__price = price
         self.quantity = quantity
 
