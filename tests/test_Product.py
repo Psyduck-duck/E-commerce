@@ -2,8 +2,8 @@ from unittest.mock import patch
 
 import pytest
 
-from src.Product import Product
 from src.LawnGrass import LawnGrass
+from src.Product import Product
 
 
 @pytest.fixture
