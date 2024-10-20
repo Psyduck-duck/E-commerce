@@ -4,6 +4,7 @@ from abc import ABC, abstractmethod
 class BaseProduct(ABC):
     """Абстрактный класс для определения базовых методов для класс Product и дочерних"""
 
+    @abstractmethod
     def __init__(self, name, description, price, quantity):
         """Конструктор с базовыми свойствами товара"""
         self.name = name
@@ -11,35 +12,6 @@ class BaseProduct(ABC):
         self.__price = price
         self.quantity = quantity
         super().__init__()
-
-    @abstractmethod
-    def __add__(self, other):
-        pass
-
-    @property
-    def get(self):
-        return self.__price
-
-
-class MixinPrintInfo:
-    """Класс-миксин для вывода в консоль информации о создании продукта"""
-
-    def __init__(self):
-        """Код выполняется при инициализации продукта"""
-        print(f"{self.__class__.__name__} ('{self.name}', '{self.description}', {self.price}, {self.quantity})")
-
-
-class Product(BaseProduct, MixinPrintInfo):
-    """Класс для определения продукта"""
-
-    name: str
-    description: str
-    __price: float
-    quantity: int
-
-    def __init__(self, name, description, price, quantity):
-        self.__price = price
-        super().__init__(name, description, price, quantity)
 
     def __str__(self):
         return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
@@ -70,6 +42,55 @@ class Product(BaseProduct, MixinPrintInfo):
         else:
             print("Цена не должна быть нулевая или отрицательная")
 
+
+class MixinPrintInfo:
+    """Класс-миксин для вывода в консоль информации о создании продукта"""
+
+    def __init__(self):
+        """Код выполняется при инициализации продукта"""
+        print(f"{self.__class__.__name__} ('{self.name}', '{self.description}', {self.price}, {self.quantity})")
+
+
+class Product(BaseProduct, MixinPrintInfo):
+    """Класс для определения продукта"""
+
+    name: str
+    description: str
+    __price: float
+    quantity: int
+
+    def __init__(self, name, description, price, quantity):
+        super().__init__(name, description, price, quantity)
+
+    # def __str__(self):
+    #     return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
+
+    # def __add__(self, other):
+    #     """сложение стоимости всего товара"""
+    #
+    #     return self.quantity * self.__price + other.quantity * other.__price
+
+    # @property
+    # def price(self):
+    #     """геттер для цены"""
+    #
+    #     return self.__price
+    #
+    # @price.setter
+    # def price(self, new_price):
+    #     """сеттер для цены"""
+    #     if new_price > 0:
+    #         if new_price < self.__price:
+    #             verification = input("Вы действительно хотите понизить цену?: ")
+    #             if verification == "y":
+    #                 self.__price = new_price
+    #             else:
+    #                 print("Отмена операции")
+    #         else:
+    #             self.__price = new_price
+    #     else:
+    #         print("Цена не должна быть нулевая или отрицательная")
+
     @classmethod
     def new_product(cls, params_dict, check_list=None):
         """Создает новые продукт из словаря, проверяю наличие продукта в заданном списке
@@ -91,6 +112,3 @@ class Product(BaseProduct, MixinPrintInfo):
                     return product
 
         return cls(name, description, price, quantity)
-
-
-product = Product("name", "dis", 1, 100)
