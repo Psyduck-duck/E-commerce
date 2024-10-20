@@ -11,15 +11,15 @@ class Category:
     name: str
     description: str
     __products: list
-    count_categories = 0
-    count_products = 0
+    category_count = 0
+    product_count = 0
 
     def __init__(self, name, description, products):
         self.name = name
         self.description = description
         self.__products = products
-        Category.count_categories += 1
-        Category.count_products += len(products)
+        Category.category_count += 1
+        Category.product_count += len(products)
 
     def __str__(self):
         self.products_quantity = 0
@@ -32,7 +32,7 @@ class Category:
         """Добавляет продукт в список продуктов"""
         if isinstance(some_product, Product):
             self.__products.append(some_product)
-            Category.count_products += 1
+            Category.product_count += 1
         else:
             raise TypeError
 
