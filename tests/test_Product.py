@@ -2,6 +2,7 @@ from unittest.mock import patch
 
 import pytest
 
+from src.LawnGrass import LawnGrass
 from src.Product import Product
 
 
@@ -15,7 +16,7 @@ def some_product_2():
     return Product("Болт М10 100", "Болт М10 100 ГОСТ 20236511", 4.5, 1000)
 
 
-def test_Product(some_product):
+def test_Product(some_product, capsys):
     x = some_product
     assert x.name == "Болт М24 170"
     assert x.description == "Болт М24 170 ГОСТ 6552714"
@@ -75,7 +76,7 @@ def test_new_low_price_no_verification(mock_input, capsys, some_product):
     assert some_product.price == 2.5
     some_product.price = 2
     message = capsys.readouterr()
-    assert message.out.strip() == "Отмена операции"
+    assert message.out.strip() == "Product ('Болт М24 170', 'Болт М24 170 ГОСТ 6552714', 2.5, 1200)\nОтмена операции"
 
 
 def test_str_product(some_product):
@@ -84,3 +85,9 @@ def test_str_product(some_product):
 
 def test_add_products(some_product, some_product_2):
     assert some_product + some_product_2 == 7500
+
+
+def test_MixinPrintInfo(capsys):
+    product = LawnGrass("grass", "lawn grass", 12, 100, "Russia", "3 month", "green")
+    message = capsys.readouterr()
+    assert message.out.strip() == "LawnGrass ('grass', 'lawn grass', 12, 100)"
