@@ -33,8 +33,8 @@ def test_Category(some_category):
         x.products
         == "Болт М8 60, 2.5 руб. Остаток: 150 шт.\nБолт М10 100, 4.5 руб. Остаток: 100 шт.\nБолт М12 40, 3 руб. Остаток: 50 шт.\n"
     )
-    assert Category.count_products == 5
-    assert Category.count_categories == 2
+    assert Category.product_count == 5
+    assert Category.category_count == 2
 
 
 class LeftClass:
@@ -64,3 +64,21 @@ def test_category_iteration(some_category):
 
     with pytest.raises(StopIteration):
         next(iterator)
+
+
+def test_category_avg_price(some_category):
+    assert some_category.middle_price() == 3.25
+
+
+def test_category_empty_product_list():
+    category = Category("test", "test", [])
+    assert category.middle_price() == 0
+
+
+def test_invalid_category():
+    with pytest.raises(TypeError):
+        Category("test", 1, [])
+    with pytest.raises(TypeError):
+        Category(1, "test", [])
+    with pytest.raises(TypeError):
+        Category("test", "test", "product")
