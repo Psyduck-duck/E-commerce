@@ -50,8 +50,8 @@ class Category:
         product_str = "".join(product_list)
         return product_str
 
-    @property
-    def avg_price(self):
+
+    def middle_price(self):
         try:
             self.__products[0]
         except IndexError:
@@ -65,4 +65,4 @@ class Category:
             total_price_for_products_list.append(product.price * product.quantity)
             total_count_products += product.quantity
 
-        return sum(total_price_for_products_list) / total_count_products
+        return round(sum(total_price_for_products_list) / total_count_products, 2)
