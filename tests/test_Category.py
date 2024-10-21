@@ -64,3 +64,11 @@ def test_category_iteration(some_category):
 
     with pytest.raises(StopIteration):
         next(iterator)
+
+
+def test_category_avg_price(some_category):
+    assert some_category.avg_price == 3.25
+
+def test_category_empty_product_list():
+    category = Category("test", "test", [])
+    assert category.avg_price == 0
