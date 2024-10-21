@@ -69,6 +69,16 @@ def test_category_iteration(some_category):
 def test_category_avg_price(some_category):
     assert some_category.avg_price == 3.25
 
+
 def test_category_empty_product_list():
     category = Category("test", "test", [])
     assert category.avg_price == 0
+
+
+def test_invalid_category():
+    with pytest.raises(TypeError):
+        Category("test", 1, [])
+    with pytest.raises(TypeError):
+        Category(1, "test", [])
+    with pytest.raises(TypeError):
+        Category("test", "test", "product")

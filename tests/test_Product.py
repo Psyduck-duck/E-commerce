@@ -92,6 +92,7 @@ def test_MixinPrintInfo(capsys):
     message = capsys.readouterr()
     assert message.out.strip() == "LawnGrass ('grass', 'lawn grass', 12, 100)"
 
+
 def test_product_with_error():
     with pytest.raises(TypeError):
         Product("name", "description", "1", 12)
@@ -105,5 +106,3 @@ def test_product_with_error():
         Product("test", "test", -1, 12)
     with pytest.raises(ValueError):
         Product("test", "test", 12, 0)
-
-

@@ -15,6 +15,10 @@ class Category:
     product_count = 0
 
     def __init__(self, name, description, products):
+        if type(name) != str or type(description) != str:
+            raise TypeError("Name and description must be str")
+        if type(products) != list:
+            raise TypeError("Products must be list")
         self.name = name
         self.description = description
         self.__products = products
@@ -55,12 +59,10 @@ class Category:
         except Exception:
             print("something wrong")
 
-        total_price_for_products_list = []   #Лист для сбора общей стоимости каждого продукта
+        total_price_for_products_list = []  # Лист для сбора общей стоимости каждого продукта
         total_count_products = 0
         for product in self.__products:
             total_price_for_products_list.append(product.price * product.quantity)
             total_count_products += product.quantity
 
         return sum(total_price_for_products_list) / total_count_products
-
-
