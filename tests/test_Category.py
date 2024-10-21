@@ -33,8 +33,8 @@ def test_Category(some_category):
         x.products
         == "Болт М8 60, 2.5 руб. Остаток: 150 шт.\nБолт М10 100, 4.5 руб. Остаток: 100 шт.\nБолт М12 40, 3 руб. Остаток: 50 шт.\n"
     )
-    assert Category.count_products == 5
-    assert Category.count_categories == 2
+    assert Category.product_count == 5
+    assert Category.category_count == 2
 
 
 class LeftClass:
