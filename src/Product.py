@@ -7,6 +7,15 @@ class BaseProduct(ABC):
     @abstractmethod
     def __init__(self, name, description, price, quantity):
         """Конструктор с базовыми свойствами товара"""
+
+        if type(name) != str or type(description) != str:
+            raise TypeError("Name and description must be str")
+        if type(price) not in [float, int]:
+            raise TypeError("Price must be float")
+        if type(quantity) != int:
+            raise TypeError("Quantity must be int")
+        if price <= 0 or quantity <= 0:
+            raise ValueError("Price and quantity must be over 0")
         self.name = name
         self.description = description
         self.__price = price

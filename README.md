@@ -51,6 +51,8 @@ pip install -r requirements.txt
 
 геттер `products` возвращает информацию о продуктах в категории в виде строки
 
+метод `middle_price` возвращает среднюю цену продукта в категории
+
 # Модуль iteration_category
 
 Класс `CategoryIterator` для создания итератора по продуктам из обекта класса Category
